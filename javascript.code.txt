@@ -1,0 +1,32 @@
+document.getElementById('resume-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get values from the form
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const skills = document.getElementById('skills').value;
+    const experience = document.getElementById('experience').value;
+    const education = document.getElementById('education').value;
+
+    // Calculate the resume score
+    let score = calculateResumeScore(name, email, skills, experience, education);
+
+    // Display the score
+    document.getElementById('score').textContent = score;
+});
+
+// Function to calculate resume score
+function calculateResumeScore(name, email, skills, experience, education) {
+    let score = 0;
+
+    // Check if required fields are filled
+    if (name && email) score += 10;
+    if (skills) score += 20;
+    if (experience) score += 30;
+    if (education) score += 30;
+
+    // Check completeness of sections
+    if (skills.split(',').length >= 5) score += 10; // At least 5 skills
+
+    return score;
+}
